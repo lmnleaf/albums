@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <title>ThinkTopic Interview Problem</title>
+
+    <!-- http://getbootstrap.com/ -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href={{ url_for('static', filename="css/styles.css")}}>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Albums</h1>
+      <div id="albums-container"></div>
+    </div>
+
+    <!-- Code I'm messing with   -->
+    <div id="content">
+    </div>
+
+    <div id="search">
+    </div>
+
+    <!-- ReactJS resources -->
+    <!-- https://facebook.github.io/react/docs/getting-started.html -->
+    <script src={{ url_for('static', filename="js/react-0.13.1/build/JSXTransformer.js") }}></script>
+    <script src={{ url_for('static', filename='js/react-0.13.1/shared/thirdparty/es5-shim.min.js') }}></script>
+    <script src={{ url_for('static', filename='js/react-0.13.1/shared/thirdparty/console-polyfill.js') }}></script>
+    <script src={{ url_for('static', filename="js/react-0.13.1/build/react.js") }}></script>
+
+    <!-- https://api.jquery.com/ -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js")}}></script>
+
+    <!-- http://getbootstrap.com/ -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!-- Project API -->
+    <script type="text/javascript" src={{ url_for('static', filename="js/api.js")}}></script>
+    <!-- Project App -->
+    <script type="text/jsx" src={{ url_for('static', filename="js/app.jsx")}}>
+
+    </script>
+  </body>
+</html>
