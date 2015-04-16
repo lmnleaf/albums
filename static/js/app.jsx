@@ -12,7 +12,7 @@
     },
     render: function() {
       return (
-        <form className="album-form" onSubmit={this.handleSubmit}>
+        <form className="album-form">
           <input className="album-search" id="album-search-search"
             type="text"
             placeholder="Search by Title or Artist"
@@ -47,9 +47,9 @@
       if (this.props.showAllInfo === false) {
         if (this.state.showAlbum) {
           return (
-            <li className="album" onClick={ this.hideAlbum }>
-              { <img className="thumb" src={this.props.album.image_url} onClick={ this.hideAlbum }/> }
-              <div className="col-md-8 pull-right album-info">
+            <li className="album row more-info" onClick={ this.hideAlbum }>
+              { <img className="thumb col-md-offset-2 col-md-1" src={this.props.album.image_url} onClick={ this.hideAlbum }/> }
+              <div className="col-md-5 pull-right album-info">
                 <div className="row">
                   { this.props.album.title }
                 </div>
@@ -64,17 +64,18 @@
           );
         } else if (this.state.showAlbum === false) {
           return (
-            <li className="album less-info" onClick={ this.showAlbum }>
-              { this.props.album.title }
-              { this.props.album.artist }
+            <li className="album row less-info" onClick={ this.showAlbum }>
+            <div className="col-md-offset-2">
+              { this.props.album.title } by { this.props.album.artist }
+            </div>
             </li>
           );
         }
       } else if (this.props.showAllInfo) {
         return (
-          <li className="album">
-            { <img className="thumb col-md-offset-2" src={this.props.album.image_url}/> }
-          <div className="col-md-7 pull-right album-info">
+          <li className="album row">
+            { <img className="thumb col-md-offset-2 col-md-1" src={this.props.album.image_url}/> }
+          <div className="col-md-5 pull-right album-info">
             <div className="row">
             { this.props.album.title }
             </div>
@@ -117,10 +118,10 @@
     showAllInfo: function() {
       if (this.state.showAllInfo) {
         this.setState({ showAllInfo: false });
-        jQuery('.info-button').html('More Info');
+        jQuery('.info-button').html('Show Details');
       } else {
         this.setState({showAllInfo: true});
-        jQuery('.info-button').html('Less Info');
+        jQuery('.info-button').html('Hide Details');
       }
     },
     hideAllInfo: function() {
@@ -141,7 +142,7 @@
           filterResult={this.state.filterResult}
           onUserInput={this.handleUserInput}
         />
-        <button className="info-button pull-right" onClick={ this.showAllInfo }>More Info</button>
+        <button className="info-button pull-right" onClick={ this.showAllInfo }>Show Details</button>
         </div>
         <ul className="albums">
         {
