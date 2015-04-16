@@ -1,6 +1,10 @@
 (function(window) {
 
   var SearchBar = React.createClass({
+
+    propTypes: {
+      filterText: React.PropTypes.string
+    },
     handleChange: function() {
       this.props.onUserInput(
         this.refs.filterTextInput.getDOMNode().value
@@ -11,7 +15,7 @@
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search by Artist"
             value={this.props.filterText}
             ref="filterTextInput"
             onChange={this.handleChange}
@@ -19,53 +23,67 @@
         </form>
       );
     }
+
   });
 
   var Album = React.createClass({
+
     propTypes: {
       album: React.PropTypes.object.isRequired
     },
     getInitialState: function() {
       return {
-        listVisible: false
+        showAlbum: false
       }
     },
-    show: function() {
-      this.replaceState({
-        albums: ["Hello", "Goodbye"]
-      })
+    showAlbum: function() {
+      this.setState({showAlbum: true})
+    },
+    hideAlbum: function() {
+      this.setState({showAlbum: false})
     },
     render: function() {
+      if (this.state.showAlbum) {
+        return (<div>
+                <h1> Here are the album details </h1>
+                <button onClick={ this.hideAlbum }>Hide</button>
+                { this.props.album.title }
+                { this.props.album.year }
+                { <img src={this.props.album.image_url}/> }
+                </div>)
+      } else if (this.state.showAlbum === false) {
       return (
-          <li className="album" onClick={this.show} >
+          <div>
+          <button onClick={ this.showAlbum }>Show</button>
+          <li className="album" >
             { this.props.album.artist }
-            { this.props.album.title }
-            { this.props.album.year }
-            { <img src={this.props.album.image_url}/> }
           </li>
+          </div>
       );
     }
+    }
+
   });
 
   var Albums = React.createClass({
 
     handleUserInput: function(filterText, filterResult, albums) {
-      var filterResultStuff = [];
+      var filterResults = [];
       this.state.albums.forEach(function(album) {
         if(album.artist.toLowerCase().indexOf(filterText) != -1) {
-          filterResultStuff.push(album);
+          filterResults.push(album);
         }
       });
       this.setState({
         filterText: filterText,
-        boo: filterResultStuff
+        filteredAlbums: filterResults
       });
     },
     getInitialState: function() {
       return {
         filterText: "",
         albums: [],
-        boo: []
+        filteredAlbums: []
       }
     },
     componentDidMount: function() {
@@ -81,7 +99,7 @@
           filterResult={this.state.filterResult}
           onUserInput={this.handleUserInput}
         />
-        <div> {this.state.boo} </div>
+        <div> {this.state.filteredAlbums} </div>
         <ul className="albums">
         Here are the albums:
         {
@@ -95,6 +113,7 @@
         </div>
       );
     }
+
   });
 
   var AlbumsFactory = React.createFactory(Albums);
