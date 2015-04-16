@@ -59,11 +59,10 @@
         } else if (this.state.showAlbum === false) {
           return (
             <div>
-            <button onClick={ this.showAlbum }>Show</button>
-            <li className="album" >
-            { this.props.album.title }
-            { this.props.album.artist }
-            </li>
+              <li className="album" onClick={ this.showAlbum }>
+              { this.props.album.title }
+              { this.props.album.artist }
+              </li>
             </div>
           );
         }

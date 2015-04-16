@@ -6,6 +6,10 @@ img.thumb {
   border: 2px solid black;
 }
 
+.album:hover {
+  color: blue;
+}
+
 img {
   height: 100px;
   width: 100px;
