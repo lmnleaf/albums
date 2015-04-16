@@ -99,11 +99,10 @@
           filterResult={this.state.filterResult}
           onUserInput={this.handleUserInput}
         />
-        <div> {this.state.filteredAlbums} </div>
         <ul className="albums">
         Here are the albums:
         {
-          self.state.albums.map(function(album, i) {
+          self.state.filteredAlbums.map(function(album, i) {
               return (
                 <Album album={ album } key={ i } />
               )
