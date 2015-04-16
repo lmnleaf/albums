@@ -15,7 +15,7 @@
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            placeholder="Search by Artist"
+            placeholder="Search by Title or Artist"
             value={this.props.filterText}
             ref="filterTextInput"
             onChange={this.handleChange}
@@ -29,11 +29,12 @@
   var Album = React.createClass({
 
     propTypes: {
-      album: React.PropTypes.object.isRequired
+      album: React.PropTypes.object.isRequired,
+      showAllInfo: React.PropTypes.boolean
     },
     getInitialState: function() {
       return {
-        showAlbum: false
+        showAlbum: false,
       }
     },
     showAlbum: function() {
@@ -43,24 +44,39 @@
       this.setState({showAlbum: false})
     },
     render: function() {
-      if (this.state.showAlbum) {
-        return (<div>
-                <h1> Here are the album details </h1>
-                <button onClick={ this.hideAlbum }>Hide</button>
-                { this.props.album.title }
-                { this.props.album.year }
-                { <img src={this.props.album.image_url}/> }
-                </div>)
-      } else if (this.state.showAlbum === false) {
-      return (
-          <div>
-          <button onClick={ this.showAlbum }>Show</button>
-          <li className="album" >
+      if (this.props.showAllInfo === false) {
+        if (this.state.showAlbum) {
+          return (
+            <div>
+              <p> Here are the album details </p>
+              <button onClick={ this.hideAlbum }>Hide</button>
+              { this.props.album.title }
+              { this.props.album.artist }
+              { this.props.album.year }
+              { <img src={this.props.album.image_url}/> }
+            </div>
+          );
+        } else if (this.state.showAlbum === false) {
+          return (
+            <div>
+            <button onClick={ this.showAlbum }>Show</button>
+            <li className="album" >
+            { this.props.album.title }
             { this.props.album.artist }
+            </li>
+            </div>
+          );
+        }
+      } else if (this.props.showAllInfo) {
+        return (
+          <li className="album" >
+            { this.props.album.title }
+            { this.props.album.artist }
+            { this.props.album.year }
+            { <img src={this.props.album.image_url}/> }
           </li>
-          </div>
-      );
-    }
+        )
+      }
     }
 
   });
@@ -70,7 +86,7 @@
     handleUserInput: function(filterText, filterResult, albums) {
       var filterResults = [];
       this.state.albums.forEach(function(album) {
-        if(album.artist.toLowerCase().indexOf(filterText) != -1) {
+        if (album.artist.toLowerCase().indexOf(filterText.toLowerCase()) != -1 || album.title.toLowerCase().indexOf(filterText.toLowerCase()) != -1) {
           filterResults.push(album);
         }
       });
@@ -83,8 +99,21 @@
       return {
         filterText: "",
         albums: [],
-        filteredAlbums: []
+        filteredAlbums: [],
+        showAllInfo: false
       }
+    },
+    showAllInfo: function() {
+      if (this.state.showAllInfo) {
+        this.setState({ showAllInfo: false })
+        jQuery('.info-button').html('More Info');
+      } else {
+        this.setState({showAllInfo: true})
+        jQuery('.info-button').html('Less Info');
+      }
+    },
+    hideAllInfo: function() {
+      this.setState({showAllInfo: false})
     },
     componentDidMount: function() {
       var self = this;
@@ -99,12 +128,16 @@
           filterResult={this.state.filterResult}
           onUserInput={this.handleUserInput}
         />
+        <button className="info-button" onClick={ this.showAllInfo }>More Info</button>
         <ul className="albums">
-        Here are the albums:
         {
-          self.state.filteredAlbums.map(function(album, i) {
+          self.state.filteredAlbums.map(function(album, i, showAllInfo) {
               return (
-                <Album album={ album } key={ i } />
+                <Album
+                  album={ album }
+                  key={ i }
+                  showAllInfo={ self.state.showAllInfo }
+                />
               )
           })
         }
