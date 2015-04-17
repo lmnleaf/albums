@@ -1,7 +1,6 @@
 (function(window) {
 
   var Route = ReactRouter.Route;
-  console.log(ReactRouter);
   var Router = ReactRouter;
   var DefaultRoute = ReactRouter.DefaultRoute;
   var RouteHandler = ReactRouter.RouteHandler;
@@ -57,7 +56,9 @@
   });
 
   var Album = React.createClass({
-
+    contextTypes: {
+      router: React.PropTypes.func
+    },
     propTypes: {
       album: React.PropTypes.object.isRequired,
       showAllInfo: React.PropTypes.bool,
@@ -129,7 +130,9 @@
   });
 
   var Albums = React.createClass({
-
+    contextTypes: {
+      router: React.PropTypes.func
+    },
     handleUserInput: function(filterText, filterResult, albums) {
       var filterResults = [];
       this.state.albums.forEach(function(album) {
@@ -175,9 +178,6 @@
       var self = this;
       return (
         <div>
-              <div className="nav">
-                <Link to="albums">Albums</Link>
-              </div>
           <div className="search-row row">
             <SearchBar
               filterText={this.state.filterText}
@@ -208,15 +208,23 @@
 
   });
 
+  var App = React.createClass({
+    render: function() {
+      return (
+        <div>
+          <Link to="albums">Albums</Link>
+          <RouteHandler />
+        </div>
+      )
+    }
+  });
+
   var routes = (
-    <Route name="albums" path="/" handler={Albums}>
-      <Route name="single" path="album/:id" handler={Single}/>
+    <Route name="app" path="/" handler={App}>
+        <Route name="albums" path="albums/" handler={Albums}/>
+        <Route name="single" path="album/:id" handler={Single}/>
     </Route>
   );
-
-  // var AlbumsFactory = React.createFactory(Albums);
-  //
-  // React.render(AlbumsFactory({}), document.getElementById('albums-container'));
 
   Router.run(routes, function (Handler) {
     React.render(<Handler/>, document.getElementById('albums-container'));
