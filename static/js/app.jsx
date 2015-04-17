@@ -6,7 +6,7 @@
   var RouteHandler = ReactRouter.RouteHandler;
   var Link = ReactRouter.Link;
 
-  var Single = React.createClass({
+  var SingleAlbum = React.createClass({
 
     contextTypes: {
       router: React.PropTypes.func
@@ -23,7 +23,26 @@
     },
     render: function() {
       return(
-        <div className="single">{this.state.single.title}</div>
+        <section>
+          <div className="album row">
+            <div className="col-md-offset-3 col-md-1 image-column">
+              { <img className="regular-image" src={this.state.single.image_url}/> }
+            </div>
+          </div>
+          <div className="album row">
+            <div className="col-md-offset-4 album-info">
+              <div className="row">
+                { this.state.single.title }
+              </div>
+              <div className="row">
+                { this.state.single.artist }
+              </div>
+              <div className="row">
+                { this.state.single.year }
+              </div>
+            </div>
+          </div>
+        </section>
         );
     }
 
@@ -79,11 +98,7 @@
         if (this.state.showAlbum) {
           return (
             <li className="album row more-info" onClick={ this.hideAlbum }>
-              { <img
-                className="thumb col-md-offset-2 col-md-1"
-                src={this.props.album.image_url} onClick={ this.hideAlbum }
-                /> }
-              <div className="col-md-5 pull-right album-info">
+              <div className="col-md-offset-4">
                 <div className="row">
                   { this.props.album.title }
                 </div>
@@ -99,8 +114,8 @@
         } else if (this.state.showAlbum === false) {
           return (
             <li className="album row less-info" onClick={ this.showAlbum }>
-              <div className="col-md-offset-2">
-                { this.props.album.title } by { this.props.album.artist }
+              <div className="col-md-offset-3">
+                { this.props.album.title }
               </div>
             </li>
           );
@@ -109,9 +124,11 @@
         return (
           <li className="album row">
             <div className="col-md-offset-2 col-md-1 image-column">
-              { <img className="thumb" src={this.props.album.image_url}/> }
+              { <Link to="single" params={{id: this.props.album._id}}>
+                  <img className="thumb" src={this.props.album.image_url}/>
+                </Link> }
             </div>
-            <div className="col-md-7 pull-right album-info">
+            <div className="col-md-7 album-info">
               <div className="row">
               <Link to="single" params={{id: this.props.album._id}}>{ this.props.album.title }</Link>
               </div>
@@ -222,7 +239,7 @@
   var routes = (
     <Route name="app" path="/" handler={App}>
         <Route name="albums" path="albums/" handler={Albums}/>
-        <Route name="single" path="album/:id" handler={Single}/>
+        <Route name="single" path="album/:id" handler={SingleAlbum}/>
     </Route>
   );
 
