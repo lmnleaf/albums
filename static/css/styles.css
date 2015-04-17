@@ -8,13 +8,13 @@ body {
 img.thumb {
   height: 75px;
   width: 75px;
-  margin-bottom: 25px;
+  margin-top: 9px;
+  margin-bottom: 20px;
   border: 3px solid rgba(98, 98, 98, 1.0);
   border-radius: 4px;
 }
 
 .regular-image {
-
   margin-bottom: 25px;
   border: 3px solid rgba(98, 98, 98, 1.0);
   border-radius: 4px;
@@ -52,14 +52,23 @@ img.thumb {
   color: rgba(78, 161, 189, 1.0);
 }
 
-.more-info {
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-  color: green;
+.album-links {
+  color: rgba(98, 98, 98, 1.0);
+  text-decoration: none;
+}
+
+.album-links:hover {
+  color: rgba(78, 161, 189, 1.0);
+  text-decoration: none;
 }
 
 .album-info {
   margin-top: 10px;
+}
+
+.album-details {
+  border-top: 2px solid rgba(7, 126, 165, 1.0);
+  border-bottom: 2px solid rgba(7, 126, 165, 1.0);
 }
 
 form.album-form {
@@ -116,6 +125,27 @@ ul {
 .info-button:focus {
   outline: none;
   color: (4, 98, 129, 1.0);
+}
+
+.albums-button {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  padding-top: 7px;
+  min-height: 40px;
+  min-width: 125px;
+  border-radius: 5px;
+  border: 3px solid rgba(78, 161, 189, 1.0);
+  color: rgba(78, 161, 189, 1.0);
+  font: bold;
+  font-size: 1.1em;
+  background: black;
+}
+
+.albums-button:hover {
+  background: rgba(78, 161, 189, 1.0);
+  color: black;
+  text-decoration: none;
 }
 
 .module-container {

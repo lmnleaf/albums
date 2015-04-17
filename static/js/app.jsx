@@ -24,7 +24,7 @@
     render: function() {
       return(
         <section>
-          <div className="album row">
+          <div className="albums row">
             <div className="col-md-offset-3 col-md-1 image-column">
               { <img className="regular-image" src={this.state.single.image_url}/> }
             </div>
@@ -63,7 +63,7 @@
         <form className="album-form">
           <input className="album-search" id="album-search-search"
             type="text"
-            placeholder="Search by Title or Artist"
+            placeholder="Filter by Title or Artist"
             value={this.props.filterText}
             ref="filterTextInput"
             onChange={this.handleChange}
@@ -87,42 +87,20 @@
         showAlbum: false,
       }
     },
-    showAlbum: function() {
-      this.setState({showAlbum: true})
-    },
-    hideAlbum: function() {
-      this.setState({showAlbum: false})
-    },
     render: function() {
       if (this.props.showAllInfo === false) {
-        if (this.state.showAlbum) {
-          return (
-            <li className="album row more-info" onClick={ this.hideAlbum }>
-              <div className="col-md-offset-4">
-                <div className="row">
-                  { this.props.album.title }
-                </div>
-                <div className="row">
-                  { this.props.album.artist }
-                </div>
-                <div className="row">
-                  { this.props.album.year }
-                </div>
-              </div>
-            </li>
-          );
-        } else if (this.state.showAlbum === false) {
-          return (
-            <li className="album row less-info" onClick={ this.showAlbum }>
-              <div className="col-md-offset-3">
+        return (
+          <li className="album row less-info">
+            <div className="col-md-offset-3">
+              <Link to="single" params={{id: this.props.album._id}} className="album-links">
                 { this.props.album.title }
-              </div>
-            </li>
-          );
-        }
+              </Link>
+            </div>
+          </li>
+        );
       } else if (this.props.showAllInfo) {
         return (
-          <li className="album row">
+          <li className="album row album-details">
             <div className="col-md-offset-2 col-md-1 image-column">
               { <Link to="single" params={{id: this.props.album._id}}>
                   <img className="thumb" src={this.props.album.image_url}/>
@@ -130,7 +108,9 @@
             </div>
             <div className="col-md-7 album-info">
               <div className="row">
-              <Link to="single" params={{id: this.props.album._id}}>{ this.props.album.title }</Link>
+              <Link to="single" params={{id: this.props.album._id}} className="album-links">
+                { this.props.album.title }
+              </Link>
               </div>
               <div className="row">
                 { this.props.album.artist }
@@ -226,19 +206,35 @@
   });
 
   var App = React.createClass({
+    contextTypes: {
+      router: React.PropTypes.func
+    },
     render: function() {
-      return (
-        <div>
-          <Link to="albums">Albums</Link>
-          <RouteHandler />
-        </div>
-      )
+      if (this.context.router.getCurrentPathname() === "/") {
+        return (
+          <div>
+            <RouteHandler />
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <div className="row">
+              <Link to="albums" className="albums-button pull-right">
+                Back to Albums
+              </Link>
+            </div>
+            <RouteHandler />
+          </div>
+        )
+      }
+
     }
   });
 
   var routes = (
     <Route name="app" path="/" handler={App}>
-        <Route name="albums" path="albums/" handler={Albums}/>
+        <Route name="albums" path="/" handler={Albums}/>
         <Route name="single" path="album/:id" handler={SingleAlbum}/>
     </Route>
   );
