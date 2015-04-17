@@ -13,6 +13,14 @@ img.thumb {
   border-radius: 4px;
 }
 
+.nav {
+  color: grey;
+}
+
+.single {
+  color: grey;
+}
+
 .image-column {
   width: 175px;
   padding-top: 10px;

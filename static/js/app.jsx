@@ -1,5 +1,35 @@
 (function(window) {
 
+  var Route = ReactRouter.Route;
+  console.log(ReactRouter);
+  var Router = ReactRouter;
+  var DefaultRoute = ReactRouter.DefaultRoute;
+  var RouteHandler = ReactRouter.RouteHandler;
+  var Link = ReactRouter.Link;
+
+  var Single = React.createClass({
+
+    contextTypes: {
+      router: React.PropTypes.func
+    },
+    getInitialState: function() {
+      return {
+        single: {}
+      }
+    },
+    componentDidMount: function() {
+      var singleId = this.context.router.getCurrentParams().id;
+      var self = this;
+      return window.AlbumAPI.get_album(self, singleId);
+    },
+    render: function() {
+      return(
+        <div className="single">{this.state.single.title}</div>
+        );
+    }
+
+  });
+
   var SearchBar = React.createClass({
 
     propTypes: {
@@ -30,7 +60,7 @@
 
     propTypes: {
       album: React.PropTypes.object.isRequired,
-      showAllInfo: React.PropTypes.bool
+      showAllInfo: React.PropTypes.bool,
     },
     getInitialState: function() {
       return {
@@ -82,7 +112,7 @@
             </div>
             <div className="col-md-7 pull-right album-info">
               <div className="row">
-                { this.props.album.title }
+              <Link to="single" params={{id: this.props.album._id}}>{ this.props.album.title }</Link>
               </div>
               <div className="row">
                 { this.props.album.artist }
@@ -145,6 +175,9 @@
       var self = this;
       return (
         <div>
+              <div className="nav">
+                <Link to="albums">Albums</Link>
+              </div>
           <div className="search-row row">
             <SearchBar
               filterText={this.state.filterText}
@@ -168,14 +201,25 @@
             })
           }
           </ul>
+            <RouteHandler/>
         </div>
       );
     }
 
   });
 
-  var AlbumsFactory = React.createFactory(Albums);
+  var routes = (
+    <Route name="albums" path="/" handler={Albums}>
+      <Route name="single" path="album/:id" handler={Single}/>
+    </Route>
+  );
 
-  React.render(AlbumsFactory({}), document.getElementById('albums-container'));
+  // var AlbumsFactory = React.createFactory(Albums);
+  //
+  // React.render(AlbumsFactory({}), document.getElementById('albums-container'));
+
+  Router.run(routes, function (Handler) {
+    React.render(<Handler/>, document.getElementById('albums-container'));
+  });
 
 })(window);
