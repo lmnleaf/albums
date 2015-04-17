@@ -155,21 +155,7 @@
               Show Details
             </button>
           </div>
-          <div className="col-md-2">
-            <section className="module parallax-small parallax-1">
-              <div className="module-container">
-              </div>
-            </section>
-            <section className="module parallax-small parallax-1">
-              <div className="module-container">
-              </div>
-            </section>
-            <section className="module parallax-small parallax-1">
-              <div className="module-container">
-              </div>
-            </section>
-          </div>
-          <ul className="albums col-md-10">
+          <ul className="albums col-md-offset-1 col-md-10">
           {
             self.state.filteredAlbums.map(function(album, i, showAllInfo) {
                 return (
