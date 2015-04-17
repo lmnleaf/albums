@@ -48,7 +48,10 @@
         if (this.state.showAlbum) {
           return (
             <li className="album row more-info" onClick={ this.hideAlbum }>
-              { <img className="thumb col-md-offset-2 col-md-1" src={this.props.album.image_url} onClick={ this.hideAlbum }/> }
+              { <img
+                className="thumb col-md-offset-2 col-md-1"
+                src={this.props.album.image_url} onClick={ this.hideAlbum }
+                /> }
               <div className="col-md-5 pull-right album-info">
                 <div className="row">
                   { this.props.album.title }
@@ -65,27 +68,29 @@
         } else if (this.state.showAlbum === false) {
           return (
             <li className="album row less-info" onClick={ this.showAlbum }>
-            <div className="col-md-offset-2">
-              { this.props.album.title } by { this.props.album.artist }
-            </div>
+              <div className="col-md-offset-2">
+                { this.props.album.title } by { this.props.album.artist }
+              </div>
             </li>
           );
         }
       } else if (this.props.showAllInfo) {
         return (
           <li className="album row">
-            { <img className="thumb col-md-offset-2 col-md-1" src={this.props.album.image_url}/> }
-          <div className="col-md-5 pull-right album-info">
-            <div className="row">
-            { this.props.album.title }
+            <div className="col-md-offset-2 col-md-1 image-column">
+              { <img className="thumb" src={this.props.album.image_url}/> }
             </div>
-            <div className="row">
-            { this.props.album.artist }
+            <div className="col-md-7 pull-right album-info">
+              <div className="row">
+                { this.props.album.title }
+              </div>
+              <div className="row">
+                { this.props.album.artist }
+              </div>
+              <div className="row">
+                { this.props.album.year }
+              </div>
             </div>
-            <div className="row">
-            { this.props.album.year }
-            </div>
-          </div>
           </li>
         )
       }
@@ -98,7 +103,11 @@
     handleUserInput: function(filterText, filterResult, albums) {
       var filterResults = [];
       this.state.albums.forEach(function(album) {
-        if (album.artist.toLowerCase().indexOf(filterText.toLowerCase()) != -1 || album.title.toLowerCase().indexOf(filterText.toLowerCase()) != -1) {
+        if (
+            album.artist.toLowerCase().indexOf(filterText.toLowerCase()) != -1
+            ||
+            album.title.toLowerCase().indexOf(filterText.toLowerCase()) != -1
+          ) {
           filterResults.push(album);
         }
       });
@@ -136,27 +145,43 @@
       var self = this;
       return (
         <div>
-        <div className="row">
-        <SearchBar
-          filterText={this.state.filterText}
-          filterResult={this.state.filterResult}
-          onUserInput={this.handleUserInput}
-        />
-        <button className="info-button pull-right" onClick={ this.showAllInfo }>Show Details</button>
-        </div>
-        <ul className="albums">
-        {
-          self.state.filteredAlbums.map(function(album, i, showAllInfo) {
-              return (
-                <Album
-                  album={ album }
-                  key={ i }
-                  showAllInfo={ self.state.showAllInfo }
-                />
-              )
-          })
-        }
-        </ul>
+          <div className="search-row row">
+            <SearchBar
+              filterText={this.state.filterText}
+              filterResult={this.state.filterResult}
+              onUserInput={this.handleUserInput}
+            />
+            <button className="info-button pull-right" onClick={ this.showAllInfo }>
+              Show Details
+            </button>
+          </div>
+          <div className="col-md-2">
+            <section className="module parallax-small parallax-1">
+              <div className="module-container">
+              </div>
+            </section>
+            <section className="module parallax-small parallax-1">
+              <div className="module-container">
+              </div>
+            </section>
+            <section className="module parallax-small parallax-1">
+              <div className="module-container">
+              </div>
+            </section>
+          </div>
+          <ul className="albums col-md-10">
+          {
+            self.state.filteredAlbums.map(function(album, i, showAllInfo) {
+                return (
+                  <Album
+                    album={ album }
+                    key={ i }
+                    showAllInfo={ self.state.showAllInfo }
+                  />
+                )
+            })
+          }
+          </ul>
         </div>
       );
     }

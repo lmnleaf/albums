@@ -9,8 +9,13 @@ img.thumb {
   height: 150px;
   width: 150px;
   margin-bottom: 25px;
-  border: 3px solid white;
+  border: 3px solid rgba(98, 98, 98, 1.0);
   border-radius: 4px;
+}
+
+.image-column {
+  width: 175px;
+  padding-top: 10px;
 }
 
 .albums {
@@ -57,13 +62,15 @@ input.album-search:hover {
   background: rgba(44, 44, 44, 1.0);
 }
 
+.search-row {
+  margin-bottom: 25px;
+}
+
 .main-container {
   font-family: 'Open Sans', sans-serif;
 }
 
 .container {
-  /*border-left: 5px solid rgba(255, 197, 58, 1.0);
-  border-right: 5px solid rgba(255, 197, 58, 1.0);*/
   border-left: 5px solid rgba(64, 64, 64, 1.0);
   border-right: 5px solid rgba(64, 64, 64, 1.0);
 }
@@ -76,8 +83,6 @@ ul {
   height: 40px;
   border-radius: 5px;
   border: 3px solid rgba(255, 197, 58, 1.0);
-  /*border: 3px solid rgba(78, 161, 189, 1.0);*/
-  /*color: rgba(4, 98, 129, 1.0);*/
   color: rgba(255, 197, 58, 1.0);
   font: bold;
   font-size: 1.1em;
@@ -85,16 +90,12 @@ ul {
 }
 
 .info-button:hover {
-  /*background: rgba(4, 98, 129, 1.0);*/
   background: rgba(255, 197, 58, 1.0);
   color: black;
 }
 
 .info-button:focus {
-
-  /*border: 3px solid rgba(3, 77, 101, 1.0);*/
   outline: none;
-  /*background: rgba(4, 98, 129, 1.0);*/
   color: (4, 98, 129, 1.0);
 }
 
@@ -131,6 +132,16 @@ section.module.parallax {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+}
+
+section.module.parallax-small {
+  height: 100px;
+  width: 100px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  margin-top: 35px;
 }
 
 section.module.parallax h1 {
