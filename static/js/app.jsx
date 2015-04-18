@@ -7,7 +7,6 @@
   var Link = ReactRouter.Link;
 
   var SingleAlbum = React.createClass({
-
     contextTypes: {
       router: React.PropTypes.func
     },
@@ -45,11 +44,9 @@
         </section>
         );
     }
-
   });
 
   var SearchBar = React.createClass({
-
     propTypes: {
       filterText: React.PropTypes.string
     },
@@ -71,7 +68,6 @@
         </form>
       );
     }
-
   });
 
   var Album = React.createClass({
@@ -202,7 +198,6 @@
         </div>
       );
     }
-
   });
 
   var App = React.createClass({
@@ -228,7 +223,6 @@
           </div>
         )
       }
-
     }
   });
 
