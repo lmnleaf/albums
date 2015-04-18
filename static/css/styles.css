@@ -10,13 +10,13 @@ img.thumb {
   width: 75px;
   margin-top: 9px;
   margin-bottom: 20px;
-  border: 3px solid rgba(98, 98, 98, 1.0);
+  border: 3px solid rgba(128, 128, 128, 1.0);
   border-radius: 4px;
 }
 
 .regular-image {
   margin-bottom: 25px;
-  border: 3px solid rgba(98, 98, 98, 1.0);
+  border: 3px solid rgba(128, 128, 128, 1.0);
   border-radius: 4px;
 }
 
@@ -45,7 +45,7 @@ img.thumb {
 .album {
   margin: 10px;
   font-size: 1.5em;
-  color: rgba(98, 98, 98, 1.0);
+  color: rgba(128, 128, 128, 1.0);
 }
 
 .less-info:hover {
@@ -53,7 +53,7 @@ img.thumb {
 }
 
 .album-links {
-  color: rgba(98, 98, 98, 1.0);
+  color: rgba(128, 128, 128, 1.0);
   text-decoration: none;
 }
 
@@ -66,6 +66,12 @@ img.thumb {
   margin-top: 10px;
 }
 
+@media (max-width: 600px) {
+  .album-info {
+    margin-left: 20%;
+  }
+}
+
 .album-details {
   border-top: 2px solid rgba(7, 126, 165, 1.0);
   border-bottom: 2px solid rgba(7, 126, 165, 1.0);
@@ -73,6 +79,18 @@ img.thumb {
 
 form.album-form {
   display: inline-block;
+}
+
+@media (max-width: 1200px) {
+  form.album-form {
+    margin-left: 5%;
+  }
+}
+
+@media (max-width: 1000px) {
+  form.album-form {
+    margin-left: 37%;
+  }
 }
 
 input.album-search {
@@ -115,6 +133,7 @@ ul {
   font: bold;
   font-size: 1.1em;
   background: black;
+  float: right;
 }
 
 .info-button:hover {
@@ -125,6 +144,21 @@ ul {
 .info-button:focus {
   outline: none;
   color: (4, 98, 129, 1.0);
+}
+
+@media (max-width: 1210px) {
+  .info-button {
+    float: none;
+    margin-left: 50%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .info-button {
+    margin-left: 45%;
+    margin-top: 2%;
+    float: none;
+  }
 }
 
 .albums-button {
@@ -140,6 +174,21 @@ ul {
   font: bold;
   font-size: 1.1em;
   background: black;
+  float: right;
+}
+
+@media (max-width: 1200px) {
+  .albums-button {
+      float: none;
+      margin-left: 80%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .albums-button {
+    margin-left: 45%;
+    float: none;
+  }
 }
 
 .albums-button:hover {

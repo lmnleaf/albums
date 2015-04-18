@@ -25,12 +25,12 @@
       return(
         <section>
           <div className="albums row">
-            <div className="col-md-offset-3 col-md-1 image-column">
+            <div className="col-md-offset-3 col-md-1 col-sm-offset-3 col-sm-1 col-xs-offset-3 col-xs-1 image-column">
               { <img className="regular-image" src={this.state.single.image_url}/> }
             </div>
           </div>
           <div className="album row">
-            <div className="col-md-offset-4 album-info">
+            <div className="col-md-offset-4 col-sm-offset-4 col-xs-offset-4 album-info">
               <div className="row">
                 { this.state.single.title }
               </div>
@@ -91,7 +91,7 @@
       if (this.props.showAllInfo === false) {
         return (
           <li className="album row less-info">
-            <div className="col-md-offset-3">
+            <div className="col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
               <Link to="single" params={{id: this.props.album._id}} className="album-links">
                 { this.props.album.title }
               </Link>
@@ -101,12 +101,12 @@
       } else if (this.props.showAllInfo) {
         return (
           <li className="album row album-details">
-            <div className="col-md-offset-2 col-md-1 image-column">
+            <div className="col-md-offset-2 col-md-1 col-sm-offset-2 col-sm-1 col-xs-offset-2 col-xs-1 image-column">
               { <Link to="single" params={{id: this.props.album._id}}>
                   <img className="thumb" src={this.props.album.image_url}/>
                 </Link> }
             </div>
-            <div className="col-md-7 album-info">
+            <div className="col-md-7 col-sm-5 col-xs-5 album-info">
               <div className="row">
               <Link to="single" params={{id: this.props.album._id}} className="album-links">
                 { this.props.album.title }
@@ -181,11 +181,11 @@
               filterResult={this.state.filterResult}
               onUserInput={this.handleUserInput}
             />
-            <button className="info-button pull-right" onClick={ this.showAllInfo }>
+            <button className="info-button" onClick={ this.showAllInfo }>
               Show Details
             </button>
           </div>
-          <ul className="albums col-md-offset-1 col-md-10">
+          <ul className="albums col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
           {
             self.state.filteredAlbums.map(function(album, i, showAllInfo) {
                 return (
@@ -220,7 +220,7 @@
         return (
           <div>
             <div className="row">
-              <Link to="albums" className="albums-button pull-right">
+              <Link to="albums" className="albums-button">
                 Back to Albums
               </Link>
             </div>
