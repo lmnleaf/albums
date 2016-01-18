@@ -183,14 +183,14 @@
           </div>
           <ul className="albums col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
           {
-            self.state.filteredAlbums.map(function(album, i, showAllInfo) {
-                return (
-                  <Album
-                    album={ album }
-                    key={ i }
-                    showAllInfo={ self.state.showAllInfo }
-                  />
-                )
+            self.state.filteredAlbums.map(function (album, i, showAllInfo) {
+              return (
+                <Album
+                  album={ album }
+                  key={ i }
+                  showAllInfo={ self.state.showAllInfo }
+                />
+              )
             })
           }
           </ul>
@@ -202,8 +202,9 @@
 
   var App = React.createClass({
     contextTypes: {
-      router: React.PropTypes.func
+      router: React.PropTypes.func.isRequired
     },
+
     render: function() {
       if (this.context.router.getCurrentPathname() === "/") {
         return (
